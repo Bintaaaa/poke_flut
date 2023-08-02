@@ -1,0 +1,7 @@
+name: mobile_app_glancer
+
+packages:
+  - domains/**
+  - features/**
+  - shared_libraries/**
+  - '*'
