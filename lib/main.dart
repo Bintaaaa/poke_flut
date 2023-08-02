@@ -2,13 +2,20 @@
 
 import 'package:common/core/constans/routes_constans.dart';
 import 'package:dependencies/bloc/bloc.dart';
+import 'package:dependencies/get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/bloc/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
+import 'package:home_screen/bloc/pokemons/pokemons_event.dart';
 import 'package:home_screen/bloc/splash/splash_screen_cubit.dart';
 import 'package:home_screen/bottom_navigation_widget.dart';
+import 'package:home_screen/home_screen.dart';
 import 'package:home_screen/splash_screen.dart';
+import 'package:poke_flut/injections/injections.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Injections().initialize();
   runApp(const MyApp());
 }
 
@@ -37,6 +44,14 @@ class MyApp extends StatelessWidget {
                 BlocProvider<BottomNavigationCubit>(
                   create: (_) => BottomNavigationCubit(),
                   child: const SplashScreen(),
+                ),
+                BlocProvider<PokemonsBloc>(
+                  create: (_) => PokemonsBloc(
+                    repository: sl(),
+                  )..add(
+                      const GetPokemons(),
+                    ),
+                  child: const HomeScreen(),
                 ),
               ],
               child: const BottomNavigationWidget(),

@@ -1,4 +1,5 @@
 import 'package:common/core/di/dependecy.dart';
+import 'package:pokemons/di/domain_pokemon_injection.dart';
 
 class Injections {
   initialize() {
@@ -6,9 +7,11 @@ class Injections {
     _registerDomains();
   }
 
-  void _registerDomains() {}
+  void _registerDomains() {
+    DomainPokeminInjection();
+  }
 
-  Future<void> _registerSharedDependencies() async {
+  _registerSharedDependencies() {
     RegisterCoreModule();
   }
 }

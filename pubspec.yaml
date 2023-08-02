@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   melos: ^3.1.1
+  pokemons:
+    path: domains/pokemons
   common:
     path: shared_libraries/common
   dependencies:
