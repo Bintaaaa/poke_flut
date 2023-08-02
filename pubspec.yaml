@@ -31,6 +31,12 @@ dependencies:
   flutter:
     sdk: flutter
   melos: ^3.1.1
+  common:
+    path: shared_libraries/common
+  dependencies:
+    path: shared_libraries/dependencies
+  home_screen:
+    path: features/home_screen
 
 
   # The following adds the Cupertino Icons font to your application.
