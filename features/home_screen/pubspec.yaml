@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  pokemons:
+    path: ../../domains/pokemons
   common:
     path: ../../shared_libraries/common
   dependencies:

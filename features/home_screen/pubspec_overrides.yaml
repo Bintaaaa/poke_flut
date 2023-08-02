@@ -1,6 +1,8 @@
-# melos_managed_dependency_overrides: common,dependencies
+# melos_managed_dependency_overrides: common,dependencies,pokemons
 dependency_overrides:
   common:
     path: ../../shared_libraries/common
   dependencies:
     path: ../../shared_libraries/dependencies
+  pokemons:
+    path: ../../domains/pokemons
