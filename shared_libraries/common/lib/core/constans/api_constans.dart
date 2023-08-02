@@ -1,7 +1,11 @@
 class ApiConstans {
   ApiConstans();
 
-  String get baseUrl => "https://developmentv1.ninehustle.com/api/";
+  String get baseUrl => "https://pokeapi.co/api/v2/";
 
-  String get baseImageUrl => "https://developmentv1.ninehustle.com";
+  //[INFO]  Get all about pokemons
+  String get pokemons => "pokemons";
+
+  String get baseImageUrl =>
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/";
 }
