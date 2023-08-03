@@ -10,6 +10,7 @@ import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_event.dart';
 import 'package:home_screen/bloc/splash/splash_screen_cubit.dart';
 import 'package:home_screen/bottom_navigation_widget.dart';
+import 'package:home_screen/detail_screen.dart';
 import 'package:home_screen/home_screen.dart';
 import 'package:home_screen/splash_screen.dart';
 import 'package:poke_flut/injections/injections.dart';
@@ -63,6 +64,19 @@ class MyApp extends StatelessWidget {
               ],
               child: const BottomNavigationWidget(),
             ),
+        RoutesConstans.detailPage: (context) {
+          final args = ModalRoute.of(context)?.settings.arguments as int;
+          return BlocProvider<DetailPokemonCubit>(
+            create: (_) => DetailPokemonCubit(
+              repository: sl(),
+            )..fetchDetailPokemon(
+                params: args,
+              ),
+            child: DetailScreen(
+              args: args,
+            ),
+          );
+        }
       },
     );
   }

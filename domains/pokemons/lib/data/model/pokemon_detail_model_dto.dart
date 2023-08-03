@@ -14,7 +14,7 @@ class PokemonDetailModelDTO {
   final List<dynamic>? pastTypes;
   final PokemonSpeciesModelDTo? species;
   final Sprites? sprites;
-  final List<Stat>? stats;
+  final List<PokemonStatisticModelDTO>? stats;
   final List<PokemonTypeModelDTO>? types;
   final int? weight;
 
@@ -45,7 +45,10 @@ class PokemonDetailModelDTO {
             json["abilities"].map((x) => Ability.fromJson(x))),
         baseExperience: json["base_experience"],
         forms: List<PokemonSpeciesModelDTo>.from(
-            json["forms"].map((x) => PokemonSpeciesModelDTo.fromJson(x))),
+          json["forms"].map(
+            (x) => PokemonSpeciesModelDTo.fromJson(x),
+          ),
+        ),
         gameIndices: List<GameIndex>.from(
             json["game_indices"].map((x) => GameIndex.fromJson(x))),
         height: json["height"],
@@ -60,9 +63,9 @@ class PokemonDetailModelDTO {
         species: PokemonSpeciesModelDTo.fromJson(
           json["species"],
         ),
-        stats: List<Stat>.from(
+        stats: List<PokemonStatisticModelDTO>.from(
           json["stats"].map(
-            (x) => Stat.fromJson(x),
+            (x) => PokemonStatisticModelDTO.fromJson(x),
           ),
         ),
         types: List<PokemonTypeModelDTO>.from(
@@ -518,18 +521,19 @@ class Other {
       );
 }
 
-class Stat {
+class PokemonStatisticModelDTO {
   final int? baseStat;
   final int? effort;
   final PokemonSpeciesModelDTo? stat;
 
-  Stat({
+  PokemonStatisticModelDTO({
     this.baseStat,
     this.effort,
     this.stat,
   });
 
-  factory Stat.fromJson(Map<String, dynamic> json) => Stat(
+  factory PokemonStatisticModelDTO.fromJson(Map<String, dynamic> json) =>
+      PokemonStatisticModelDTO(
         baseStat: json["base_stat"],
         effort: json["effort"],
         stat: PokemonSpeciesModelDTo.fromJson(

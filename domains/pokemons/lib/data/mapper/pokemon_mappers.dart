@@ -2,6 +2,7 @@ import 'package:common/extensions/get_id_extension.dart';
 import 'package:pokemons/data/model/pokemon_detail_model_dto.dart';
 import 'package:pokemons/data/model/pokemond_model_dto.dart';
 import 'package:pokemons/domains/entities/pokemon_detail_entity.dart';
+import 'package:pokemons/domains/entities/pokemon_statistic_entity.dart';
 import 'package:pokemons/domains/entities/pokemon_types_entity.dart';
 import 'package:pokemons/domains/entities/pokemons_entities.dart';
 
@@ -21,9 +22,38 @@ class PokemonsMappers {
 
   PokemonDetailEntity pokemonDetailModelToEntity(PokemonDetailModelDTO data) =>
       PokemonDetailEntity(
+        name: data.name ?? "-",
+        weight: data.weight ?? 0,
+        height: data.height ?? -1,
         types: pokemonTypeModelToEntity(
           data,
         ),
+        stat: pokemonStatisticModelToEntity(
+          data,
+        ),
+      );
+
+  List<PokemonStatisticEntity> pokemonStatisticModelToEntity(
+      PokemonDetailModelDTO data) {
+    List<PokemonStatisticEntity> stat = [];
+    for (PokemonStatisticModelDTO item in data.stats!) {
+      stat.add(
+        PokemonStatisticEntity(
+          baseStat: item.baseStat ?? 0,
+          effort: item.effort ?? 0,
+          stat: pokemonDataStatisticModelToEntity(
+            item.stat ?? PokemonSpeciesModelDTo(),
+          ),
+        ),
+      );
+    }
+    return stat;
+  }
+
+  PokemonStatEntity pokemonDataStatisticModelToEntity(
+          PokemonSpeciesModelDTo data) =>
+      PokemonStatEntity(
+        name: data.name ?? "",
       );
 
   List<PokemonTypeEntity> pokemonTypeModelToEntity(PokemonDetailModelDTO data) {
