@@ -11,29 +11,32 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: BlocListener<SplashScreenCubit, SplashScreenState>(
-          listener: (context, state) {
-            final status = state.stateSplahScreen.status;
-            if (status.isHasData) {
-              Navigator.pushReplacementNamed(
-                context,
-                RoutesConstans.bottomNavigation,
-              );
-            }
-          },
-          child: Container(
-            margin: const EdgeInsets.all(
-              16.0,
-            ),
-            alignment: Alignment.center,
-            child: const Text(
-              "Hello, I'm Bijantyum",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
+      body: BlocListener<SplashScreenCubit, SplashScreenState>(
+        listener: (context, state) {
+          final status = state.stateSplahScreen.status;
+          if (status.isHasData) {
+            Navigator.pushReplacementNamed(
+              context,
+              RoutesConstans.bottomNavigation,
+            );
+          }
+        },
+        child: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage(
+                "assets/splash.png",
               ),
-              textAlign: TextAlign.center,
+            ),
+          ),
+          child: const Text(
+            "Welcome to,\nTeknikal Test Bijantium",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
             ),
           ),
         ),
