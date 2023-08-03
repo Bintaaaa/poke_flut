@@ -1,32 +1,32 @@
 import 'package:common/state/view_data_state.dart';
 import 'package:dependencies/bloc/bloc.dart';
-import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_state.dart';
+import 'package:home_screen/bloc/search_cubit/search_state.dart';
 import 'package:pokemons/domains/repositories/pokemons_repository.dart';
 
-class DetailPokemonCubit extends Cubit<DetailPokemonState> {
+class SearchCubit extends Cubit<SearchState> {
   final PokemonsRepository repository;
 
-  DetailPokemonCubit({
+  SearchCubit({
     required this.repository,
   }) : super(
-          DetailPokemonState(
-            stateDetailPokemon: ViewData.initial(),
+          SearchState(
+            stateSearch: ViewData.initial(),
           ),
         );
 
   Future<void> fetchDetailPokemon({
-    required int params,
+    required String params,
   }) async {
     emit(
-      DetailPokemonState(stateDetailPokemon: ViewData.loading()),
+      SearchState(stateSearch: ViewData.loading()),
     );
     final result = await repository.getPokemon(
       params: params.toString(),
     );
     result.fold(
       (failure) => emit(
-        DetailPokemonState(
-          stateDetailPokemon: ViewData.error(
+        SearchState(
+          stateSearch: ViewData.error(
             message: failure.errorMessage,
             failureResponse: failure,
           ),
@@ -34,8 +34,8 @@ class DetailPokemonCubit extends Cubit<DetailPokemonState> {
       ),
       (data) {
         emit(
-          DetailPokemonState(
-            stateDetailPokemon: ViewData.loaded(
+          SearchState(
+            stateSearch: ViewData.loaded(
               data: data,
             ),
           ),
@@ -43,5 +43,4 @@ class DetailPokemonCubit extends Cubit<DetailPokemonState> {
       },
     );
   }
-  
 }

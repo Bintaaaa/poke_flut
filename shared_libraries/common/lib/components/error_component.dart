@@ -2,8 +2,12 @@ import 'package:dependencies/flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 
 class ErrorComponent extends StatelessWidget {
+  final String? url;
+  final String? message;
   const ErrorComponent({
     super.key,
+    this.url,
+    this.message,
   });
 
   @override
@@ -18,14 +22,15 @@ class ErrorComponent extends StatelessWidget {
           SizedBox(
             height: 250,
             child: SvgPicture.network(
-              "https://www.svgrepo.com/show/207530/warning-attention.svg",
+              url ??
+                  "https://www.svgrepo.com/show/207530/warning-attention.svg",
             ),
           ),
           const SizedBox(
             height: 24,
           ),
-          const Text(
-            "Maaf Data Sedang Tidak Tersedia",
+          Text(
+            message ?? "Maaf Data Sedang Tidak Tersedia",
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 24,

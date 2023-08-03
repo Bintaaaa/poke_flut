@@ -5,10 +5,12 @@ class PokemonDetailEntity {
   final List<PokemonTypeEntity> types;
   final List<PokemonStatisticEntity> stat;
   final String name;
+  final int id;
   final int height;
   final int weight;
 
   const PokemonDetailEntity({
+    required this.id,
     required this.name,
     required this.types,
     required this.height,

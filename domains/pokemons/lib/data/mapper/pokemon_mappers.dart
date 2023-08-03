@@ -22,6 +22,7 @@ class PokemonsMappers {
 
   PokemonDetailEntity pokemonDetailModelToEntity(PokemonDetailModelDTO data) =>
       PokemonDetailEntity(
+        id: data.id ?? 0,
         name: data.name ?? "-",
         weight: data.weight ?? 0,
         height: data.height ?? -1,
