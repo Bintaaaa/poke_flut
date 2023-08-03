@@ -24,12 +24,15 @@ class CardPokemonComponent extends StatefulWidget {
 }
 
 class _CardPokemonComponentState extends State<CardPokemonComponent> {
+  ScrollController scrollController = ScrollController();
+  
   @override
   void initState() {
     super.initState();
     context.read<DetailPokemonCubit>().fetchDetailPokemon(
           params: widget.pokemonId,
         );
+    
   }
 
   @override

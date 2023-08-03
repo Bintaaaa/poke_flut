@@ -4,7 +4,7 @@ import 'package:pokemons/data/model/pokemon_detail_model_dto.dart';
 import 'package:pokemons/data/model/pokemond_model_dto.dart';
 
 abstract class PokemonsRemoteDatasource {
-  Future<PokemonModelDTO> getPokemons();
+  Future<PokemonModelDTO> getPokemons({int page = 30});
 
   Future<PokemonDetailModelDTO> getPokemon({
     required String params,
@@ -19,10 +19,14 @@ class PokemonsRemoteDatasourceImpl implements PokemonsRemoteDatasource {
   final Dio dio;
 
   @override
-  Future<PokemonModelDTO> getPokemons() async {
+  Future<PokemonModelDTO> getPokemons({int page = 30}) async {
     try {
       final response = await dio.get(
         ConstanValues.apiConstans.pokemons,
+        queryParameters: {
+          "page": page,
+          "limit": page,
+        },
       );
       return PokemonModelDTO.fromJson(
         response.data,

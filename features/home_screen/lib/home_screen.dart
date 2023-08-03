@@ -4,12 +4,30 @@ import 'package:common/components/shimmer_loading_component.dart';
 import 'package:common/extensions/get_svg_source.dart';
 import 'package:common/state/view_data_state.dart';
 import 'package:dependencies/bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_state.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  ScrollController scrollController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        context.read<PokemonsBloc>().fetchPokemons();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +44,19 @@ class HomeScreen extends StatelessWidget {
               if (status.isHasData) {
                 final data = state.statePokemons.data;
                 return ListView.builder(
-                  itemCount: data?.length,
+                  controller: scrollController,
+                  itemCount: data!.length + 1,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return CardPokemonComponent(
-                      pokemonId: data![index].id,
-                      title: "#${data[index].id}\n${data[index].name}",
-                      sourceSvg: data[index].id.toSvg,
-                    );
+                    if (index < data.length) {
+                      return CardPokemonComponent(
+                        pokemonId: data[index].id,
+                        title: "#${data[index].id}\n${data[index].name}",
+                        sourceSvg: data[index].id.toSvg,
+                      );
+                    } else {
+                      return const CupertinoActivityIndicator();
+                    }
                   },
                 );
               } else if (status.isLoading) {

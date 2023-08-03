@@ -17,9 +17,11 @@ class PokemonsRepositoryImpl extends PokemonsRepository {
     required this.mapper,
   });
   @override
-  Future<Either<FailureResponse, List<PokemonEntity>>> getPokemons() async {
+  Future<Either<FailureResponse, List<PokemonEntity>>> getPokemons({
+    int page = 30,
+  }) async {
     try {
-      final result = await datasource.getPokemons();
+      final result = await datasource.getPokemons(page: page);
       return Right(
         mapper.pokemonsModelToEntity(
           result,
