@@ -20,27 +20,27 @@ class DetailPokemonCubit extends Cubit<DetailPokemonState> {
     emit(
       DetailPokemonState(stateDetailPokemon: ViewData.loading()),
     );
-    // final result = await repository.getPokemon(
-    //   params: params.toString(),
-    // );
-    // result.fold(
-    //   (failure) => emit(
-    //     DetailPokemonState(
-    //       stateDetailPokemon: ViewData.error(
-    //         message: failure.errorMessage,
-    //         failureResponse: failure,
-    //       ),
-    //     ),
-    //   ),
-    //   (data) {
-    //     emit(
-    //       DetailPokemonState(
-    //         stateDetailPokemon: ViewData.loaded(
-    //           data: data,
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // );
+    final result = await repository.getPokemon(
+      params: params.toString(),
+    );
+    result.fold(
+      (failure) => emit(
+        DetailPokemonState(
+          stateDetailPokemon: ViewData.error(
+            message: failure.errorMessage,
+            failureResponse: failure,
+          ),
+        ),
+      ),
+      (data) {
+        emit(
+          DetailPokemonState(
+            stateDetailPokemon: ViewData.loaded(
+              data: data,
+            ),
+          ),
+        );
+      },
+    );
   }
 }
