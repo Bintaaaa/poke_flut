@@ -1,3 +1,4 @@
+import 'package:common/components/shimmer_loading_component.dart';
 import 'package:common/components/spesification_component.dart';
 import 'package:common/components/statistic_component.dart';
 import 'package:common/state/view_data_state.dart';
@@ -85,6 +86,23 @@ class DetailScreen extends StatelessWidget {
                       const SizedBox(
                         height: 12.0,
                       ),
+                    ],
+                  ),
+                );
+              } else if (status.isLoading) {
+                return ListView.builder(
+                  itemCount: 8,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => const Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: ShimmerLoadingComponent(),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: ShimmerLoadingComponent(),
+                      )
                     ],
                   ),
                 );

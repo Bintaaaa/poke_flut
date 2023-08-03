@@ -111,6 +111,8 @@ class HeaderDetailPokemonWidget extends StatelessWidget {
           );
         } else if (status.isLoading) {
           return const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ShimmerLoadingComponent(
                 height: 100,
