@@ -1,6 +1,8 @@
-# melos_managed_dependency_overrides: common,dependencies
+# melos_managed_dependency_overrides: common,dependencies,home_screen
 dependency_overrides:
   common:
     path: ../../shared_libraries/common
   dependencies:
     path: ../../shared_libraries/dependencies
+  home_screen:
+    path: ../../features/home_screen

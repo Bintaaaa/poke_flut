@@ -44,8 +44,8 @@ class PokemonDetailModelDTO {
         abilities: List<Ability>.from(
             json["abilities"].map((x) => Ability.fromJson(x))),
         baseExperience: json["base_experience"],
-        forms:
-            List<PokemonSpeciesModelDTo>.from(json["forms"].map((x) => PokemonSpeciesModelDTo.fromJson(x))),
+        forms: List<PokemonSpeciesModelDTo>.from(
+            json["forms"].map((x) => PokemonSpeciesModelDTo.fromJson(x))),
         gameIndices: List<GameIndex>.from(
             json["game_indices"].map((x) => GameIndex.fromJson(x))),
         height: json["height"],
@@ -60,7 +60,6 @@ class PokemonDetailModelDTO {
         species: PokemonSpeciesModelDTo.fromJson(
           json["species"],
         ),
-        sprites: Sprites.fromJson(json["sprites"]),
         stats: List<Stat>.from(
           json["stats"].map(
             (x) => Stat.fromJson(x),
@@ -87,8 +86,9 @@ class Ability {
   });
 
   factory Ability.fromJson(Map<String, dynamic> json) => Ability(
-        ability:
-            json["ability"] == null ? null : PokemonSpeciesModelDTo.fromJson(json["ability"]),
+        ability: json["ability"] == null
+            ? null
+            : PokemonSpeciesModelDTo.fromJson(json["ability"]),
         isHidden: json["is_hidden"],
         slot: json["slot"],
       );
@@ -103,7 +103,8 @@ class PokemonSpeciesModelDTo {
     this.url,
   });
 
-  factory PokemonSpeciesModelDTo.fromJson(Map<String, dynamic> json) => PokemonSpeciesModelDTo(
+  factory PokemonSpeciesModelDTo.fromJson(Map<String, dynamic> json) =>
+      PokemonSpeciesModelDTo(
         name: json["name"],
         url: json["url"],
       );
@@ -120,8 +121,9 @@ class GameIndex {
 
   factory GameIndex.fromJson(Map<String, dynamic> json) => GameIndex(
         gameIndex: json["game_index"],
-        version:
-            json["version"] == null ? null : PokemonSpeciesModelDTo.fromJson(json["version"]),
+        version: json["version"] == null
+            ? null
+            : PokemonSpeciesModelDTo.fromJson(json["version"]),
       );
 }
 
@@ -135,7 +137,9 @@ class Move {
   });
 
   factory Move.fromJson(Map<String, dynamic> json) => Move(
-        move: json["move"] == null ? null : PokemonSpeciesModelDTo.fromJson(json["move"]),
+        move: json["move"] == null
+            ? null
+            : PokemonSpeciesModelDTo.fromJson(json["move"]),
         versionGroupDetails: List<VersionGroupDetail>.from(
           json["version_group_details"].map(
             (x) => VersionGroupDetail.fromJson(x),
@@ -183,18 +187,15 @@ class GenerationV {
 
 class GenerationIv {
   final Sprites? diamondPearl;
-  final Sprites? heartgoldSoulsilver;
   final Sprites? platinum;
 
   GenerationIv({
     this.diamondPearl,
-    this.heartgoldSoulsilver,
     this.platinum,
   });
 
   factory GenerationIv.fromJson(Map<String, dynamic> json) => GenerationIv(
         diamondPearl: Sprites.fromJson(json["diamond-pearl"]),
-        heartgoldSoulsilver: Sprites.fromJson(json["heartgold-soulsilver"]),
         platinum: Sprites.fromJson(json["platinum"]),
       );
 }
@@ -222,7 +223,6 @@ class Versions {
 
   factory Versions.fromJson(Map<String, dynamic> json) => Versions(
         generationI: GenerationI.fromJson(json["generation-i"]),
-        generationIi: GenerationIi.fromJson(json["generation-ii"]),
         generationIii: GenerationIii.fromJson(json["generation-iii"]),
         generationIv: GenerationIv.fromJson(json["generation-iv"]),
         generationV: GenerationV.fromJson(json["generation-v"]),
@@ -269,7 +269,6 @@ class Sprites {
         frontFemale: json["front_female"],
         frontShiny: json["front_shiny"],
         frontShinyFemale: json["front_shiny_female"],
-        other: Other.fromJson(json["other"]),
         versions: Versions.fromJson(json["versions"]),
         animated: Sprites.fromJson(json["animated"]),
       );
@@ -551,6 +550,6 @@ class PokemonTypeModelDTO {
   factory PokemonTypeModelDTO.fromJson(Map<String, dynamic> json) =>
       PokemonTypeModelDTO(
         slot: json["slot"],
-        type:  PokemonSpeciesModelDTo.fromJson(json["type"]),
+        type: PokemonSpeciesModelDTo.fromJson(json["type"]),
       );
 }

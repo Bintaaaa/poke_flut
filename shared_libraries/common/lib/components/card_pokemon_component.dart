@@ -1,17 +1,35 @@
 import 'package:common/components/chip_ability_component.dart';
+import 'package:common/components/shimmer_loading_component.dart';
+import 'package:common/state/view_data_state.dart';
+import 'package:dependencies/bloc/bloc.dart';
 import 'package:dependencies/flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
+import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_cubit.dart';
+import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_state.dart';
 
-class CardPokemonComponent extends StatelessWidget {
+class CardPokemonComponent extends StatefulWidget {
+  final int pokemonId;
   final String title;
-  final List<String> ability;
   final String sourceSvg;
   const CardPokemonComponent({
     super.key,
     required this.title,
-    required this.ability,
     required this.sourceSvg,
+    required this.pokemonId,
   });
+
+  @override
+  State<CardPokemonComponent> createState() => _CardPokemonComponentState();
+}
+
+class _CardPokemonComponentState extends State<CardPokemonComponent> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<DetailPokemonCubit>().fetchDetailPokemon(
+          params: widget.pokemonId,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +56,7 @@ class CardPokemonComponent extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  title,
+                  widget.title,
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -48,15 +66,36 @@ class CardPokemonComponent extends StatelessWidget {
                 const Spacer(),
                 Flexible(
                   flex: 2,
-                  child: ListView.builder(
-                    itemCount: ability.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ChipAbilityPokemon(
-                        title: ability[index],
-                      );
+                  child: BlocBuilder<DetailPokemonCubit, DetailPokemonState>(
+                    builder: (context, state) {
+                      final status = state.stateDetailPokemon.status;
+                      if (status.isHasData) {
+                        final data = state.stateDetailPokemon.data;
+
+                        return ListView.builder(
+                          itemCount: data?.types.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ChipAbilityPokemon(
+                              title: data!.types[index].type.name,
+                            );
+                          },
+                        );
+                      } else {
+                        return ListView.builder(
+                          itemCount: 2,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return const ShimmerLoadingComponent(
+                              width: 60,
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                 )
@@ -76,7 +115,7 @@ class CardPokemonComponent extends StatelessWidget {
                   ),
                 ),
                 SvgPicture.network(
-                  sourceSvg,
+                  widget.sourceSvg,
                 ),
               ],
             ),

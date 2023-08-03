@@ -18,21 +18,21 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.symmetric(
             horizontal: 16.0,
+            vertical: 16.0,
           ),
           child: BlocBuilder<PokemonsBloc, PokemonsState>(
             builder: (context, state) {
-              final status = state.statePokemons?.status;
-              if (status!.isHasData) {
-                final data = state.statePokemons!.data;
-
+              final status = state.statePokemons.status;
+              if (status.isHasData) {
+                final data = state.statePokemons.data;
                 return ListView.builder(
                   itemCount: data?.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return CardPokemonComponent(
-                      title: "#${data?[index].id}\n${data?[index].name}",
-                      ability: const ["Terbang", "Melayang"],
-                      sourceSvg: data![index].id.toSvg,
+                      pokemonId: data![index].id,
+                      title: "#${data[index].id}\n${data[index].name}",
+                      sourceSvg: data[index].id.toSvg,
                     );
                   },
                 );

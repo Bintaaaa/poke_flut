@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   dependencies:
     path: ../dependencies
+  home_screen:
+    path: ../../features/home_screen
 
 dev_dependencies:
   flutter_test:

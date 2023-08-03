@@ -5,6 +5,7 @@ import 'package:dependencies/bloc/bloc.dart';
 import 'package:dependencies/get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/bloc/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_cubit.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_event.dart';
 import 'package:home_screen/bloc/splash/splash_screen_cubit.dart';
@@ -51,6 +52,12 @@ class MyApp extends StatelessWidget {
                   )..add(
                       const GetPokemons(),
                     ),
+                  child: const HomeScreen(),
+                ),
+                BlocProvider<DetailPokemonCubit>(
+                  create: (_) => DetailPokemonCubit(
+                    repository: sl(),
+                  ),
                   child: const HomeScreen(),
                 ),
               ],
