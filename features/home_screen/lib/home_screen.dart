@@ -4,7 +4,6 @@ import 'package:common/components/shimmer_loading_component.dart';
 import 'package:common/extensions/get_svg_source.dart';
 import 'package:common/state/view_data_state.dart';
 import 'package:dependencies/bloc/bloc.dart';
-import 'package:dependencies/flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
 import 'package:home_screen/bloc/pokemons/pokemons_state.dart';

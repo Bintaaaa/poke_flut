@@ -1,5 +1,8 @@
 import 'package:common/extensions/get_id_extension.dart';
+import 'package:pokemons/data/model/pokemon_detail_model_dto.dart';
 import 'package:pokemons/data/model/pokemond_model_dto.dart';
+import 'package:pokemons/domains/entities/pokemon_detail_entity.dart';
+import 'package:pokemons/domains/entities/pokemon_types_entity.dart';
 import 'package:pokemons/domains/entities/pokemons_entities.dart';
 
 class PokemonsMappers {
@@ -15,4 +18,31 @@ class PokemonsMappers {
     }
     return pokemons;
   }
+
+  PokemonDetailEntity pokemonDetailModelToEntity(PokemonDetailModelDTO data) =>
+      PokemonDetailEntity(
+        types: pokemonTypeModelToEntity(
+          data,
+        ),
+      );
+
+  List<PokemonTypeEntity> pokemonTypeModelToEntity(PokemonDetailModelDTO data) {
+    List<PokemonTypeEntity> types = [];
+    for (PokemonTypeModelDTO item in data.types!) {
+      types.add(
+        PokemonTypeEntity(
+          type: pokemonSpeciesModelToEntity(
+            item.type ?? PokemonSpeciesModelDTo(),
+          ),
+        ),
+      );
+    }
+    return types;
+  }
+
+  PokemonSpeciesEntity pokemonSpeciesModelToEntity(
+          PokemonSpeciesModelDTo data) =>
+      PokemonSpeciesEntity(
+        name: data.name ?? "-",
+      );
 }

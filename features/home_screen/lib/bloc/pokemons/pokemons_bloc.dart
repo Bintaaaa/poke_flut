@@ -20,7 +20,7 @@ class PokemonsBloc extends Bloc<PokemonsEvent, PokemonsState> {
             statePokemons: ViewData.loading(),
           ),
         );
-        final result = await repository.getAllPokemons();
+        final result = await repository.getPokemons();
 
         result.fold(
           (failure) => emit(

@@ -5,6 +5,7 @@ import 'package:dependencies/dartz/dartz.dart';
 import 'package:dependencies/dio/dio.dart';
 import 'package:pokemons/data/datasource/pokemons_remote_datasource.dart';
 import 'package:pokemons/data/mapper/pokemon_mappers.dart';
+import 'package:pokemons/domains/entities/pokemon_detail_entity.dart';
 import 'package:pokemons/domains/entities/pokemons_entities.dart';
 import 'package:pokemons/domains/repositories/pokemons_repository.dart';
 
@@ -16,11 +17,39 @@ class PokemonsRepositoryImpl extends PokemonsRepository {
     required this.mapper,
   });
   @override
-  Future<Either<FailureResponse, List<PokemonEntity>>> getAllPokemons() async {
+  Future<Either<FailureResponse, List<PokemonEntity>>> getPokemons() async {
     try {
       final result = await datasource.getPokemons();
       return Right(
         mapper.pokemonsModelToEntity(
+          result,
+        ),
+      );
+    } on SocketException {
+      return const Left(
+        FailureResponse(
+          errorMessage: "Koneksimu tidak stabil, silahkan coba lagi",
+        ),
+      );
+    } on DioException catch (error) {
+      return Left(
+        FailureResponse(
+          errorMessage: error.response?.data['message'].toString() ??
+              "Something Wrong Error",
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<FailureResponse, PokemonDetailEntity>> getPokemon(
+      {required String params}) async {
+    try {
+      final result = await datasource.getPokemon(
+        params: params,
+      );
+      return Right(
+        mapper.pokemonDetailModelToEntity(
           result,
         ),
       );

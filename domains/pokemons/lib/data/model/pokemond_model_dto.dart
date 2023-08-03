@@ -17,7 +17,7 @@ class PokemonModelDTO {
         next: json["next"],
         previous: json["previous"],
         results: List<PokemonResultDTO>.from(
-          json["results"]!.map(
+          json["results"].map(
             (x) => PokemonResultDTO.fromJson(
               x,
             ),
