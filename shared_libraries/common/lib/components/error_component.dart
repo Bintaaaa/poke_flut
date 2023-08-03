@@ -32,7 +32,7 @@ class ErrorComponent extends StatelessWidget {
           Text(
             message ?? "Maaf Data Sedang Tidak Tersedia",
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),

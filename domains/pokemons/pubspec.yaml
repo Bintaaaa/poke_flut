@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  mockito: ^5.4.2
+  build_runner: ^2.4.6
   common:
     path: ../../shared_libraries/common
   dependencies:
