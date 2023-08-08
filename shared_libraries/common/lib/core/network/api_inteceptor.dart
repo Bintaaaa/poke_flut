@@ -8,8 +8,6 @@ class ApiInterceptor extends Interceptor {
     Map<String, dynamic> headers = {};
 
     headers['Content-Type'] = 'application/json';
-    headers['x-api-key'] =
-        'OfnNqKwQFij6iyaaPTXdIFWRIbXLzsHW2zvAeeBfSEcD4QJc3fzAgdZK4ymwEIS4';
     headers['Accept'] = 'application/json';
 
     return headers;
