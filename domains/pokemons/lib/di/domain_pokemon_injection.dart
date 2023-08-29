@@ -17,8 +17,8 @@ class DomainPokeminInjection {
         ),
       );
 
-  _registerMapper() => sl.registerLazySingleton<PokemonsMappers>(
-        () => PokemonsMappers(),
+  _registerMapper() => sl.registerSingleton<PokemonsMappers>(
+        PokemonsMappers(),
       );
 
   _registerRepositories() => sl.registerLazySingleton<PokemonsRepository>(

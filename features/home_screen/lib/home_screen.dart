@@ -53,6 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: scrollController,
                   itemCount: data!.length + 1,
                   shrinkWrap: true,
+                  addAutomaticKeepAlives: false,
+                  addRepaintBoundaries: false,
                   itemBuilder: (context, index) {
                     if (index < data.length) {
                       return CardPokemonComponent(

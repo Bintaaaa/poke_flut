@@ -22,6 +22,12 @@ class _SearchScreenState extends State<SearchScreen> {
   );
 
   @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

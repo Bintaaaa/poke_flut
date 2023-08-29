@@ -1,4 +1,6 @@
-class PokemonModelDTO {
+import 'package:dependencies/equatable/equatable.dart';
+
+class PokemonModelDTO extends Equatable {
   final int? count;
   final String? next;
   final dynamic previous;
@@ -24,9 +26,17 @@ class PokemonModelDTO {
           ),
         ),
       );
+
+  @override
+  List<Object?> get props => [
+        count,
+        next,
+        previous,
+        results,
+      ];
 }
 
-class PokemonResultDTO {
+class PokemonResultDTO extends Equatable {
   final String? name;
   final String? url;
 
@@ -40,4 +50,7 @@ class PokemonResultDTO {
         name: json["name"],
         url: json["url"],
       );
+
+  @override
+  List<Object?> get props => [name, url];
 }
