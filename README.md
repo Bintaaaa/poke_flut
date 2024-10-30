@@ -2,7 +2,7 @@
 
 ## What's Poke Flut App?
 
-Poke Flut is an application specifically designed to carry out the mobile developer recruitment process at the Blue Sky Tech company. This app is designed by Bijantyum.
+Poke Flut is an application specifically designed to carry out the mobile developer recruitment process at the Luna POS. This app is designed by Bijantyum.
 
 ## Getting Started
 
