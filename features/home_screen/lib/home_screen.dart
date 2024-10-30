@@ -1,6 +1,7 @@
 import 'package:common/components/card_pokemon_component.dart';
 import 'package:common/components/error_component.dart';
 import 'package:common/components/shimmer_loading_component.dart';
+import 'package:common/core/constans/routes_constans.dart';
 import 'package:common/extensions/get_svg_source.dart';
 import 'package:common/state/view_data_state.dart';
 import 'package:dependencies/bloc/bloc.dart';
@@ -66,10 +67,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   addRepaintBoundaries: false,
                   itemBuilder: (context, index) {
                     if (index < data.length) {
+                      final pokemon = data[index];
                       return CardPokemonComponent(
-                        pokemonId: data[index].id,
-                        title: "#${data[index].id}\n${data[index].name}",
-                        sourceSvg: data[index].id.toSvg,
+                        pokemonId: pokemon.id,
+                        title: "#${pokemon.id}\n${pokemon.name}",
+                        sourceSvg: pokemon.id.toSvg,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            RoutesConstans.detailPage,
+                            arguments: pokemon.id,
+                          );
+                        },
                       );
                     } else {
                       return const CupertinoActivityIndicator();

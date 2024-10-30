@@ -9,12 +9,25 @@ import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_cubit.dart';
 import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_state.dart';
 import 'package:home_screen/bloc/detail_pokemon/widget/header_detail_pokemon_widget.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final int args;
   const DetailScreen({
     super.key,
     required this.args,
   });
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<DetailPokemonCubit>().fetchDetailPokemon(
+          params: widget.args,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +150,7 @@ class DetailScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: HeaderDetailPokemonWidget(args: args),
+        child: HeaderDetailPokemonWidget(args: widget.args),
       ),
     );
   }

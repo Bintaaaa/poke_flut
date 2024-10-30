@@ -1,6 +1,7 @@
 import 'package:common/components/card_pokemon_component.dart';
 import 'package:common/components/error_component.dart';
 import 'package:common/components/shimmer_loading_component.dart';
+import 'package:common/core/constans/routes_constans.dart';
 import 'package:common/extensions/get_svg_source.dart';
 import 'package:common/state/view_data_state.dart';
 import 'package:dependencies/bloc/bloc.dart';
@@ -52,18 +53,24 @@ class _SearchScreenState extends State<SearchScreen> {
                         height: 70,
                         width: 70,
                       );
-                    } else if (status.isHasData &&
-                        searchController.text.isNotEmpty) {
+                    } else if (status.isHasData && searchController.text.isNotEmpty) {
                       final data = state.stateSearch.data;
+
                       return CardPokemonComponent(
                         title: data!.name,
                         sourceSvg: data.id.toSvg,
                         pokemonId: data.id,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            RoutesConstans.detailPage,
+                            arguments: data.id,
+                          );
+                        },
                       );
                     } else if (status.isInitial) {
                       return const ErrorComponent(
-                        url:
-                            "https://www.svgrepo.com/show/390590/find-glass-minus-online-search-seo.svg",
+                        url: "https://www.svgrepo.com/show/390590/find-glass-minus-online-search-seo.svg",
                         message: "Yuk Cari Pokemon Kesayanganmu",
                       );
                     } else {
