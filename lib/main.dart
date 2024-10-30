@@ -10,6 +10,7 @@ import 'package:home_screen/bloc/pokemons/pokemons_bloc.dart';
 import 'package:home_screen/bloc/search_cubit/search_cubit.dart';
 import 'package:home_screen/bloc/splash/splash_screen_cubit.dart';
 import 'package:home_screen/bottom_navigation_widget.dart';
+import 'package:home_screen/compare_screen.dart';
 import 'package:home_screen/detail_screen.dart';
 import 'package:home_screen/home_screen.dart';
 import 'package:home_screen/search_screen.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Luna POS',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.yellow,
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
                 BlocProvider<PokemonsBloc>(
                   create: (_) => PokemonsBloc(
                     repository: sl(),
-                  )..fetchPokemons(),
+                  )..fetchPokemon(),
                   child: const HomeScreen(),
                 ),
                 BlocProvider<DetailPokemonCubit>(
@@ -65,6 +66,12 @@ class MyApp extends StatelessWidget {
                     repository: sl(),
                   ),
                   child: const SearchScreen(),
+                ),
+                BlocProvider<PokemonsBloc>(
+                  create: (_) => PokemonsBloc(
+                    repository: sl(),
+                  )..fetchPokemon(),
+                  child: const CompareScreen(),
                 ),
               ],
               child: const BottomNavigationWidget(),

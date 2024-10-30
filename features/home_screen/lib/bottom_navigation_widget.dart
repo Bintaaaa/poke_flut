@@ -1,8 +1,8 @@
 import 'package:dependencies/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/bloc/bottom_navigation/bottom_navigation_cubit.dart';
+import 'package:home_screen/compare_screen.dart';
 import 'package:home_screen/home_screen.dart';
-import 'package:home_screen/profile_screen.dart';
 import 'package:home_screen/search_screen.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
@@ -22,12 +22,7 @@ class BottomNavigationWidget extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.home_outlined,
-                color: context
-                            .watch<BottomNavigationCubit>()
-                            .state
-                            .stateBottomNavigation
-                            .data ==
-                        0
+                color: context.watch<BottomNavigationCubit>().state.stateBottomNavigation.data == 0
                     ? Colors.green[700]
                     : Colors.grey,
               ),
@@ -36,12 +31,7 @@ class BottomNavigationWidget extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.search_rounded,
-                color: context
-                            .watch<BottomNavigationCubit>()
-                            .state
-                            .stateBottomNavigation
-                            .data ==
-                        1
+                color: context.watch<BottomNavigationCubit>().state.stateBottomNavigation.data == 1
                     ? Colors.green[700]
                     : Colors.grey,
               ),
@@ -49,18 +39,13 @@ class BottomNavigationWidget extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.person_3_outlined,
-                color: context
-                            .watch<BottomNavigationCubit>()
-                            .state
-                            .stateBottomNavigation
-                            .data ==
-                        2
+                Icons.compare_arrows_outlined,
+                color: context.watch<BottomNavigationCubit>().state.stateBottomNavigation.data == 2
                     ? Colors.green[700]
                     : Colors.grey,
               ),
-              label: "Profile",
-            )
+              label: "Compare",
+            ),
           ]),
     );
   }
@@ -71,15 +56,14 @@ class BottomNavigationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentIndex =
-        context.watch<BottomNavigationCubit>().state.stateBottomNavigation.data;
+    final currentIndex = context.watch<BottomNavigationCubit>().state.stateBottomNavigation.data;
     switch (currentIndex) {
       case 0:
         return const HomeScreen();
       case 1:
         return const SearchScreen();
       case 2:
-        return const ProfileScreen();
+        return const CompareScreen();
       default:
         return const HomeScreen();
     }

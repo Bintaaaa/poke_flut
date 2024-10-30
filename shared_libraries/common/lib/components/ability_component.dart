@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SpecificationComponent extends StatelessWidget {
-  const SpecificationComponent({
+class AbilityComponent extends StatelessWidget {
+  const AbilityComponent({
     super.key,
     required this.title,
-    required this.subTitle,
   });
 
   final String title;
-  final String subTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -16,18 +14,11 @@ class SpecificationComponent extends StatelessWidget {
       margin: const EdgeInsets.only(
         bottom: 6.0,
       ),
-      child: Wrap(
-        spacing: 24,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14.0,
-            ),
-          ),
-          Text(
-            subTitle,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 14.0,

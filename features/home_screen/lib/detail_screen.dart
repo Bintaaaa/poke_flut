@@ -1,3 +1,4 @@
+import 'package:common/components/ability_component.dart';
 import 'package:common/components/shimmer_loading_component.dart';
 import 'package:common/components/spesification_component.dart';
 import 'package:common/components/statistic_component.dart';
@@ -8,12 +9,25 @@ import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_cubit.dart';
 import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_state.dart';
 import 'package:home_screen/bloc/detail_pokemon/widget/header_detail_pokemon_widget.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   final int args;
   const DetailScreen({
     super.key,
     required this.args,
   });
+
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<DetailPokemonCubit>().fetchDetailPokemon(
+          params: widget.args,
+        );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +68,11 @@ class DetailScreen extends StatelessWidget {
                           color: Colors.green[700],
                         ),
                       ),
-                      SpesificationComponent(
+                      SpecificationComponent(
                         title: "Height",
                         subTitle: "${data!.height} cm",
                       ),
-                      SpesificationComponent(
+                      SpecificationComponent(
                         title: "Weight",
                         subTitle: "${data.weight} mg",
                       ),
@@ -76,15 +90,37 @@ class DetailScreen extends StatelessWidget {
                       ListView.builder(
                         itemCount: data.stat.length,
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
+                          final stats = data.stat[index];
                           return StatisticPokemonComponent(
-                            title: data.stat[index].stat!.name,
-                            value: data.stat[index].baseStat,
+                            title: stats.stat!.name,
+                            value: stats.baseStat,
                           );
                         },
                       ),
+                      Text(
+                        "Abilities",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.green[700],
+                        ),
+                      ),
                       const SizedBox(
                         height: 12.0,
+                      ),
+                      ListView.builder(
+                        itemCount: data.abilities.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final abilities = data.abilities[index];
+                          final number = index + 1;
+                          return AbilityComponent(
+                            title: "$number. ${abilities.name.toUpperCase()}",
+                          );
+                        },
                       ),
                     ],
                   ),
@@ -114,7 +150,7 @@ class DetailScreen extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: HeaderDetailPokemonWidget(args: args),
+        child: HeaderDetailPokemonWidget(args: widget.args),
       ),
     );
   }

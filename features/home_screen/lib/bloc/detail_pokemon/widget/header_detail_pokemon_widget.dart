@@ -69,8 +69,7 @@ class HeaderDetailPokemonWidget extends StatelessWidget {
                       ),
                       SizedBox(
                         height: 35,
-                        child:
-                            BlocBuilder<DetailPokemonCubit, DetailPokemonState>(
+                        child: BlocBuilder<DetailPokemonCubit, DetailPokemonState>(
                           builder: (context, state) {
                             final status = state.stateDetailPokemon.status;
                             if (status.isHasData) {
