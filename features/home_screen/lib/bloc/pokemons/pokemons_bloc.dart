@@ -13,9 +13,9 @@ class PokemonsBloc extends Cubit<PokemonsState> {
             statePokemons: ViewData.loading(),
           ),
         );
-  int currentIndex = 30;
+  int currentIndex = 25;
 
-  Future<void> fetchPokemons() async {
+  Future<void> fetchPokemon() async {
     final result = await repository.getPokemons(
       page: currentIndex,
     );
@@ -50,7 +50,7 @@ class PokemonsBloc extends Cubit<PokemonsState> {
               ),
             ),
           );
-          currentIndex += 30;
+          currentIndex += 25;
         }
       },
     );

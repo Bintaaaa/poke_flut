@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:common/error/failure_response.dart';
@@ -36,16 +37,14 @@ class PokemonsRepositoryImpl extends PokemonsRepository {
     } on DioException catch (error) {
       return Left(
         FailureResponse(
-          errorMessage: error.response?.data['message'].toString() ??
-              "Something Wrong Error",
+          errorMessage: error.response?.data['message'].toString() ?? "Something Wrong Error",
         ),
       );
     }
   }
 
   @override
-  Future<Either<FailureResponse, PokemonDetailEntity>> getPokemon(
-      {required String params}) async {
+  Future<Either<FailureResponse, PokemonDetailEntity>> getPokemon({required String params}) async {
     try {
       final result = await datasource.getPokemon(
         params: params,
@@ -61,11 +60,11 @@ class PokemonsRepositoryImpl extends PokemonsRepository {
           errorMessage: "Koneksimu tidak stabil, silahkan coba lagi",
         ),
       );
-    } on DioException catch (error) {
-      return Left(
+    } on DioException catch (error, s) {
+      log("the erros is $s");
+      return const Left(
         FailureResponse(
-          errorMessage: error.response?.data['message'].toString() ??
-              "Something Wrong Error",
+          errorMessage: "Something Wrong Error",
         ),
       );
     }

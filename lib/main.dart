@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                 BlocProvider<PokemonsBloc>(
                   create: (_) => PokemonsBloc(
                     repository: sl(),
-                  )..fetchPokemons(),
+                  )..fetchPokemon(),
                   child: const HomeScreen(),
                 ),
                 BlocProvider<DetailPokemonCubit>(

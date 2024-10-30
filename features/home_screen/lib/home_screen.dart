@@ -22,9 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        context.read<PokemonsBloc>().fetchPokemons();
+      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
+        context.read<PokemonsBloc>().fetchPokemon();
       }
     });
   }
@@ -38,6 +37,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Mohammad Bijantium Sinatria",
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Container(
           margin: const EdgeInsets.symmetric(
