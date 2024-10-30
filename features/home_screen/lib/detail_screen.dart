@@ -1,3 +1,4 @@
+import 'package:common/components/ability_component.dart';
 import 'package:common/components/shimmer_loading_component.dart';
 import 'package:common/components/spesification_component.dart';
 import 'package:common/components/statistic_component.dart';
@@ -54,11 +55,11 @@ class DetailScreen extends StatelessWidget {
                           color: Colors.green[700],
                         ),
                       ),
-                      SpesificationComponent(
+                      SpecificationComponent(
                         title: "Height",
                         subTitle: "${data!.height} cm",
                       ),
-                      SpesificationComponent(
+                      SpecificationComponent(
                         title: "Weight",
                         subTitle: "${data.weight} mg",
                       ),
@@ -76,15 +77,37 @@ class DetailScreen extends StatelessWidget {
                       ListView.builder(
                         itemCount: data.stat.length,
                         shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
+                          final stats = data.stat[index];
                           return StatisticPokemonComponent(
-                            title: data.stat[index].stat!.name,
-                            value: data.stat[index].baseStat,
+                            title: stats.stat!.name,
+                            value: stats.baseStat,
                           );
                         },
                       ),
+                      Text(
+                        "Abilities",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                          color: Colors.green[700],
+                        ),
+                      ),
                       const SizedBox(
                         height: 12.0,
+                      ),
+                      ListView.builder(
+                        itemCount: data.abilities.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final abilities = data.abilities[index];
+                          final number = index + 1;
+                          return AbilityComponent(
+                            title: "$number. ${abilities.name.toUpperCase()}",
+                          );
+                        },
                       ),
                     ],
                   ),

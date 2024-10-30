@@ -22,15 +22,14 @@ class ErrorComponent extends StatelessWidget {
           SizedBox(
             height: 250,
             child: SvgPicture.network(
-              url ??
-                  "https://www.svgrepo.com/show/207530/warning-attention.svg",
+              url ?? "https://www.svgrepo.com/show/207530/warning-attention.svg",
             ),
           ),
           const SizedBox(
             height: 24,
           ),
           Text(
-            message ?? "Maaf Data Sedang Tidak Tersedia",
+            message ?? "Tuliskan Nama Lengkap Charactermu dengan Benar",
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontSize: 24,
