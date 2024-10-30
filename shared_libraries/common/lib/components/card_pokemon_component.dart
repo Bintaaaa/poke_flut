@@ -1,18 +1,17 @@
-import 'package:common/core/constans/routes_constans.dart';
-import 'package:dependencies/bloc/bloc.dart';
 import 'package:dependencies/flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:home_screen/bloc/detail_pokemon/detail_pokemon_cubit.dart';
 
 class CardPokemonComponent extends StatefulWidget {
   final int pokemonId;
   final String title;
   final String sourceSvg;
+  final Function() onTap;
   const CardPokemonComponent({
     super.key,
     required this.title,
     required this.sourceSvg,
     required this.pokemonId,
+    required this.onTap,
   });
 
   @override
@@ -23,23 +22,9 @@ class _CardPokemonComponentState extends State<CardPokemonComponent> {
   ScrollController scrollController = ScrollController();
 
   @override
-  void initState() {
-    super.initState();
-    context.read<DetailPokemonCubit>().fetchDetailPokemon(
-          params: widget.pokemonId,
-        );
-  }
-
-  @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          RoutesConstans.detailPage,
-          arguments: widget.pokemonId,
-        );
-      },
+      onTap: widget.onTap,
       child: Container(
         height: 130.0,
         padding: const EdgeInsets.all(
