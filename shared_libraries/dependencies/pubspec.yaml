@@ -17,6 +17,7 @@ dependencies:
   dio: ^5.2.1+1
   shimmer: ^3.0.0
   equatable: ^2.0.5
+  fl_chart: ^0.69.0
 
 dev_dependencies:
   flutter_test:
