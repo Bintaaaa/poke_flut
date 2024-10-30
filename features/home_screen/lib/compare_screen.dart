@@ -136,16 +136,22 @@ class _CompareScreenState extends State<CompareScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: const Icon(
-                                  Icons.close,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  "Choose Pokemon",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                              ),
+                                IconButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  icon: const Icon(
+                                    Icons.close,
+                                  ),
+                                ),
+                              ],
                             ),
                             ListView.builder(
                               controller: scrollController,
